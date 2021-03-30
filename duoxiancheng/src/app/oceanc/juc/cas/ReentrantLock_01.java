@@ -1,5 +1,6 @@
 package app.oceanc.juc.cas;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -27,6 +28,13 @@ public class ReentrantLock_01 {
     }
 
     public void m2() {
-        lock.tryLock();
+        try {
+            lock.tryLock(5, TimeUnit.SECONDS);
+            System.out.println("等待五秒拿到!");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
     }
 }

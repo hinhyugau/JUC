@@ -37,8 +37,22 @@ public class ReentrantLock_01_main {
                 }
             }
         };
+        Runnable r3 = new Runnable() {
+            @Override
+            public void run() {
 
-        new Thread(r1, "r1").start();
-        new Thread(r2, "r2").start();
+                try {
+                    TimeUnit.SECONDS.sleep(6);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                reentrantLock_01.m2();
+            }
+        };
+
+        //new Thread(r1, "r1").start();
+        // new Thread(r2, "r2").start();
+        new Thread(r3).start();
     }
 }
