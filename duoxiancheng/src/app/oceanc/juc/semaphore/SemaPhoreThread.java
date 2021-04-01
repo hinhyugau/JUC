@@ -14,7 +14,7 @@ public class SemaPhoreThread {
         Semaphore semaphore = new Semaphore(1);
         new Thread(() -> {
             try {
-                //阻塞方法
+                //阻塞方法 获取许可
                 semaphore.acquire();
                 System.out.println("T1 running");
                 Thread.sleep(200);
@@ -22,6 +22,7 @@ public class SemaPhoreThread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
+                // 执行完把锁权限归还
                 semaphore.release();
             }
         }).start();
